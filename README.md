@@ -68,5 +68,6 @@ docker run --rm -dit --network=host --name iris-server iris-server:v1
 Development
 docker run --rm -dit --name iris-server -p 3000:3000 -p 8800:8800 iris-server:v1
 docker run --rm -dit --network=host --name chronicle-server chronicle-server:dev 
+docker run --rm -dit --network=host --name chronicle-server chronicle-server-testnet:latest 
 
 ```

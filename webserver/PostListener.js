@@ -33,24 +33,18 @@ class PostListener {
     this.app.post("/addAction", this.addAction.bind(this))
 
     //Hardcoded for now
-    this.subscribeAction("zar.tbn", "result")
-    this.subscribeAction("qbe.tbn", "result")
-    this.subscribeAction("dac.tbn", "result")
-    this.subscribeAction("rev.tbn", "result")
-    this.subscribeAction("sql.tbn", "result")
-    this.subscribeAction("san.tbn", "result")
-    this.subscribeEzarAction("zar", "trxreport")
+    this.subscribeAction("zar", "trxreport")
     
 
     this.mr.start()
-    this.getAccountListFromAPI()
+    //this.getAccountListFromAPI()
   }
 
   stop() {
     this.server.close(()=>{console.log('Process terminated')});
   }
 
-  getAccountListFromAPI() {
+  /*getAccountListFromAPI() {
     axios.get('https://walletapi.coolx.io/api/v2/account/list').then(
       (response) => {
         let accounts = response.data.accounts
@@ -59,7 +53,7 @@ class PostListener {
     ).catch((error) => {
       console.error(error)
     })
-  }
+  }*/
 
   subscribe(subscription) {
     if (!subscription.isValid()) {
@@ -90,13 +84,7 @@ class PostListener {
 
   subscribeAction(contract, action){
     console.log(`subscribe contract: ${contract}, subscribe action: ${action}`)
-    let subscriptionTransfer = MessageSubscription.actionSubscription(contract, action, this.bancorHandler.bind(this))
-    this.subscribe(subscriptionTransfer)
-  }
-
-  subscribeEzarAction(contract, action){
-    console.log(`subscribe contract: ${contract}, subscribe action: ${action}`)
-    let subscriptionTransfer = MessageSubscription.actionSubscription(contract, action, this.ezarHandler.bind(this))
+    let subscriptionTransfer = MessageSubscription.actionSubscription(contract, action, this.actionHandler.bind(this))
     this.subscribe(subscriptionTransfer)
   }
 
@@ -153,39 +141,14 @@ class PostListener {
         console.error(error)
       })
     }
-    else{ //Send to COOLX API
-      let payload = `chainId=${this.chain_id}&transactionId=${message.trx_id}`;
-      axios.post(`https://walletapi.coolx.io/api/v2/Message?${payload}`,  "")
-      .then((res) => {
-        console.log(`https://walletapi.coolx.io/api/v2/Message?: ${res.status} and ${res.statusText}`)
-      })
-      .catch((error) => {
-        console.error(error)
-      })
-    }
   }
 
-  bancorHandler(message) {
-    console.log(`Action - message - ${JSON.stringify(message)}`)
-    //Send to BANCOR API on COOLX
+  actionHandler(message) {
+    console.log(`TRANSFER - message - ${JSON.stringify(message)}`)
+    //let payload = this.jwt.sign(message)
+    let urlData = `MessageType=0&AccountName=${message.trace.act.data.to}`;
     let payload = this.jwt.sign(message)
-    //console.log(`Action - jwt - ${payload}`)
-    axios.post(`https://us-central1-coolx-242811.cloudfunctions.net/processTrade`, payload)
-    .then((res) => {
-      console.log(`https://us-central1-coolx-242811.cloudfunctions.net/processTrade: ${res.status} and ${res.statusText}`)
-    })
-    .catch((error) => {
-      console.error(error)
-    })
-  }
-
-  ezarHandler(message) {
-    //https://dev.api.ezar.co.za/api/v1/wallet/PostMessage?MessageType=0&AccountName=virtual_acountname
-    console.log(`Action - message - ${JSON.stringify(message)}`)
-    //Send to EZAR API
-    let payload = this.jwt.sign(message)
-    //console.log(`Action - jwt - ${payload}`)
-    axios.post(`${this.ezar_url}api/v1/wallet/PostMessage`, payload)
+    axios.post(`${this.ezar_url}api/v1/wallet/PostMessage?${urlData}`, payload)
     .then((res) => {
       console.log(`${this.ezar_url}api/v1/wallet/PostMessage: ${res.status} and ${res.statusText}`)
     })
