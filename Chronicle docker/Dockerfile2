@@ -1,12 +1,12 @@
 FROM ubuntu:18.04
-RUN apt update && apt install -y wget
-RUN wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | sudo apt-key add -
+RUN apt update && apt install -y wget gnupg2 software-properties-common
+RUN wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | apt-key add -
 RUN apt-add-repository 'deb https://apt.kitware.com/ubuntu/ bionic main'
 
 RUN add-apt-repository ppa:ubuntu-toolchain-r/test
 
 RUN apt update && \
-RUN apt install -y git g++-8 cmake libssl-dev libgmp-dev zlib1g-dev
+ apt install -y git g++-8 cmake libssl-dev libgmp-dev zlib1g-dev
 RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 800 --slave /usr/bin/g++ g++ /usr/bin/g++-8
 
 RUN wget https://dl.bintray.com/boostorg/release/1.67.0/source/boost_1_67_0.tar.gz
