@@ -11,8 +11,8 @@ RUN cd eos-chronicle \
 && cmake .. \
 && make
 
-COPY config.dev.ini /config.ini
-#COPY config.ini /config.ini
+#COPY config.dev.ini /config.ini
+COPY config.ini /config.ini
 #Run chronicle as follows in order to create a docker container with PID 1 running chronicle in order to be ablt 
 #to stop the container "docker stop" and chronicle will shutdown cleanly.
 CMD ["/eos-chronicle/build/chronicle-receiver", "--config-dir=/","--data-dir=/chronicle-data"]
