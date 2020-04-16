@@ -145,10 +145,8 @@ class PostListener {
 
   actionHandler(message) {
     console.log(`TRANSFER - message - ${JSON.stringify(message)}`)
-    //let payload = this.jwt.sign(message)
-    //let urlData = `MessageType=0&AccountName=${message.trace.act.data.to}`;
     let payload = this.jwt.sign(message)
-    axios.post(`${this.ezar_url}api/v1/wallet/PostPaymentMessage?`, message)
+    axios.post(`${this.ezar_url}api/v1/wallet/PostPaymentMessage?`, payload)
     .then((res) => {
       console.log(`${this.ezar_url}api/v1/wallet/PostPaymentMessage: ${res.status} and ${res.statusText}`)
     })

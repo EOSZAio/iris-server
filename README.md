@@ -57,6 +57,16 @@ Options
                                 (default 8880).
 
   Project home: https://github.com/CALEOS/iris-server
+
+```
+
+### JWT
+```
+ssh-keygen -t rsa -b 4096 -m PEM -f jwtRS256.key
+# Don't add passphrase
+openssl rsa -in jwtRS256.key -pubout -outform PEM -out jwtRS256.key.pub
+cat jwtRS256.key
+cat jwtRS256.key.pub
 ```
 
 ### Docker
@@ -64,6 +74,23 @@ NOTE: Make sure docker container is always running unless issued a docker stop c
 ```
 docker run -dit --restart unless-stopped -v /telos/chronicle-data:/chronicle-data --network=host --name chronicle-server chronicle-server:v1 
 docker run --rm -dit --network=host --name iris-server iris-server:v1
+
+
+Testnet
+docker build -t eoszaio/chronicle-server:testnet .
+docker build -t chronicle-server:v1 .
+docker push eoszaio/chronicle-server:testnet
+docker pull eoszaio/chronicle-server:testnet
+
+docker run -dit --restart unless-stopped -v ~/chronicle-data:/chronicle-data --network=host --name chronicle-server  eoszaio/chronicle-server:testnet
+docker run -dit --restart unless-stopped -v ~/chronicle-data:/chronicle-data --network=host --name chronicle-server  chronicle-server:v1
+docker run --rm -dit --network=host --name iris-server iris-server:v1
+
+Local
+docker run --rm -dit --network=host --name chronicle-server chronicle-server-testnet:latest
+docker run -dit --restart unless-stopped -v ~/chronicle-data:/chronicle-data --network=host --name chronicle-server chronicle-server:v1 
+docker run --rm -dit --network=host --name iris-server iris-server:v1
+
 
 Development
 docker run --rm -dit --name iris-server -p 3000:3000 -p 8800:8800 iris-server:v1
