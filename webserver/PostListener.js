@@ -34,7 +34,8 @@ class PostListener {
 
     //Hardcoded for now
     this.subscribeAction("zar", "trxreport")
-    this.subscribeTransfer("stablecoin.z")
+    this.subscribeAction("stablecoin.z","transfer")
+    
     
     this.mr.start()
     //this.getAccountListFromAPI()
@@ -151,7 +152,7 @@ class PostListener {
       console.log(`${this.ezar_url}api/v1/Transaction/Notify: ${res.status} and ${res.statusText}`)
     })
     .catch((error) => {
-      console.error(error.data)
+      console.error(error)
     })
   }
 
