@@ -12,10 +12,16 @@ const opts = [
         defaultValue: 8800
     },
     {
-        name: 'web-port', alias: 'w',
+        name: 'web-port1', alias: 'x',
         type: Number,
-        description: "The port that will be exposed to the web for incoming posts (default 8080).",
+        description: "The port that will be exposed to the coolx web for incoming posts (default 8080).",
         defaultValue: 8080
+    },
+    {
+        name: 'web-port2', alias: 'e',
+        type: Number,
+        description: "The port that will be exposed to the ezar web for incoming posts (default 8081).",
+        defaultValue: 8081
     }
 ]
 

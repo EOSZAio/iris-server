@@ -41,9 +41,7 @@ class CoolxPostListener {
     this.subscribeAction("san.tbn", "result")
     this.subscribeEzarAction("zar", "trxreport")
     
-
-    this.mr.start()
-    this.getAccountListFromAPI()
+    //this.getAccountListFromAPI()
   }
 
   stop() {

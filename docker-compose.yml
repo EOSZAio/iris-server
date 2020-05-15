@@ -1,10 +1,12 @@
 version: '3'
 services:
   iris:
+    build: 
+      context: .
     image: "iris-server:v1"
     container_name: iris
     ports:
-      - "3000:3000"
+      #- "3000:3000"
       - "8800:8800"
       - "8801:8801"
     networks:
@@ -14,8 +16,6 @@ services:
       context: "./Chronicle\ docker/"
     image: "chronicle-server:v1"
     container_name: chronicle
-    volumes:
-      - /telos/chronicle-data:/chronicle-data
     restart: unless-stopped
     networks:
       - chronicle

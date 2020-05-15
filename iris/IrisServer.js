@@ -3,8 +3,8 @@
 // maybe need a new file to run, think about easiest way for a sysadmin to run this, they should be able to 
 // configure ports without creating a javascript file
 
-//const MessageRouter = require('../routing/MessageRouter')
-const { CoolXPostListener, EzarPostListener } = require('../index')
+const MessageRouter = require('../routing/MessageRouter')
+const { CoolxPostListener, EzarPostListener } = require('../index')
 const optionsDef = require('./IrisOptions')
 const commandLineArgs = require('command-line-args')
 const commandLineUsage = require('command-line-usage')
@@ -17,15 +17,18 @@ if (options.help) {
 }
 
 const chronicleListenerPort = options['chronicle-port']
-const webport = isNaN(options['web-port']) ? 8080 : options['web-port']
-//const clientListenerPort = isNaN(options['web-port']) ? 8880 : options['web-port']
-//let mr = new MessageRouter(chronicleListenerPort)
-//mr.start()
-let coolx = new CoolXPostListener(chronicleListenerPort, webport)
+const webport1 = isNaN(options['web-port1']) ? 8080 : options['web-port1']
+const webport2 = isNaN(options['web-port2']) ? 8081 : options['web-port2']
+const clientListenerPort = isNaN(options['web-port1']) ? 8880 : options['web-port1']
+
+let mr = new MessageRouter(chronicleListenerPort)
+mr.start()
+
+let coolx = new CoolxPostListener(chronicleListenerPort, webport1)
 coolx.start()
 
-let ezar = new EzarPostListener(chronicleListenerPort, webport)
-coolx.start(ezar)
+let ezar = new EzarPostListener(chronicleListenerPort, webport2)
+ezar.start()
 
 process.once('SIGINT', function (code) {
     console.log('\nSIGINT received...');
