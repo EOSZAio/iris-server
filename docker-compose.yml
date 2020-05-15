@@ -6,20 +6,15 @@ services:
     image: "iris-server:v1"
     container_name: iris
     ports:
-      #- "3000:3000"
-      - "8800:8800"
-      - "8801:8801"
-    networks:
-      - chronicle
+      - "3000:3000"
+      - "3001:3001"
+    network_mode: "host"
   chronicle:
     build: 
       context: "./Chronicle\ docker/"
     image: "chronicle-server:v1"
     container_name: chronicle
+    volumes:
+      - ~/chronicle-data:/chronicle-data
     restart: unless-stopped
-    networks:
-      - chronicle
-
-networks:
-  chronicle:
-      driver: bridge
+    network_mode: "host"
