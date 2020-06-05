@@ -24,10 +24,10 @@ const clientListenerPort = isNaN(options['web-port1']) ? 8880 : options['web-por
 let mr = new MessageRouter(chronicleListenerPort)
 mr.start()
 
-let ezar = new EzarPostListener(mr, chronicleListenerPort, webport2)
+let coolx = new CoolxPostListener(mr, chronicleListenerPort, webport1)
 coolx.start()
 
-let ezar = new EzarPostListener(chronicleListenerPort, webport2)
+let ezar = new EzarPostListener(mr, chronicleListenerPort, webport2)
 ezar.start()
 
 process.once('SIGINT', function (code) {
