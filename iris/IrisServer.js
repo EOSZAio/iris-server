@@ -24,7 +24,7 @@ const clientListenerPort = isNaN(options['web-port1']) ? 8880 : options['web-por
 let mr = new MessageRouter(chronicleListenerPort)
 mr.start()
 
-let coolx = new CoolxPostListener(chronicleListenerPort, webport1)
+let ezar = new EzarPostListener(mr, chronicleListenerPort, webport2)
 coolx.start()
 
 let ezar = new EzarPostListener(chronicleListenerPort, webport2)
@@ -34,10 +34,12 @@ process.once('SIGINT', function (code) {
     console.log('\nSIGINT received...');
     coolx.stop();
     ezar.stop();
+    process.exit(1);
 });
 
 process.once('SIGTERM', function (code) {
     console.log('\nSIGTERM received...');
     coolx.stop();
     ezar.stop();
+    process.exit(1);
 });

@@ -1,7 +1,7 @@
 const config = require('../config');
 const express = require('express')
 const bodyParser = require("body-parser")
-const MessageRouter = require('../routing/MessageRouter')
+//const MessageRouter = require('../routing/MessageRouter')
 const MessageSubscription = require('../routing/MessageSubscription')
 const JWTService = require('../jwt/JWTService')
 const axios = require('axios')
@@ -9,14 +9,14 @@ const jwtEnabled = false //for verifcation only
 
 class EzarPostListener {
 
-  constructor(chronicleport = 8800,  webport = 8081) {
+  constructor(messageRouter, chronicleport = 8800,  webport = 8081) {
       this.app = express();
       console.log(`Start webserver, ${webport}`)
       this.server = this.app.listen(webport)
       this.app.use(bodyParser.urlencoded({extended: false}))
       this.app.use(bodyParser.json())
 
-      this.mr = new MessageRouter(chronicleport)
+      this.mr = messageRouter
       this.chain_id = '4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11'
       this.subscriptions = {}
       this.jwt = new JWTService()
@@ -38,17 +38,6 @@ class EzarPostListener {
   stop() {
     this.server.close(()=>{console.log('Process terminated')});
   }
-
-  /*getAccountListFromAPI() {
-    axios.get('https://walletapi.coolx.io/api/v2/account/list').then(
-      (response) => {
-        let accounts = response.data.accounts
-        accounts.forEach(data => this.subscribeTransfer(data));
-      }
-    ).catch((error) => {
-      console.error(error)
-    })
-  }*/
 
   subscribe(subscription) {
     if (!subscription.isValid()) {
