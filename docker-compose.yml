@@ -5,7 +5,7 @@ services:
       context: .
     image: "iris-server:v1"
     container_name: iris
-    #ports:
+    ports:
       - "8881:8881"
     #  - "3001:3001"
     #  - "3002:3002"
