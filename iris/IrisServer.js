@@ -20,7 +20,7 @@ if (options.help) {
 const chronicleListenerPort = options['chronicle-port']
 const webport1 = isNaN(options['web-port1']) ? 8080 : options['web-port1']
 const webport2 = isNaN(options['web-port2']) ? 8081 : options['web-port2']
-const webport2 = isNaN(options['web-port3']) ? 8082 : options['web-port3']
+const webport3 = isNaN(options['web-port3']) ? 8082 : options['web-port3']
 
 const clientListenerPort = isNaN(options['websocket-port']) ? 8881 : options['websocket-port']
 
