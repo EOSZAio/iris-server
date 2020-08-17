@@ -1,4 +1,4 @@
-FROM ubuntu:18.10
+FROM ubuntu:18.04
 
 RUN apt update && apt install -y git g++ make cmake libboost-dev libboost-thread-dev libboost-test-dev  libboost-filesystem-dev libboost-date-time-dev libboost-system-dev libboost-iostreams-dev  libboost-program-options-dev libboost-locale-dev libssl-dev libgmp-dev build-essential
 
