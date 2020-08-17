@@ -31,14 +31,13 @@ mr.start()
 let ws = new ClientListener(mr, clientListenerPort)
 ws.start()
 
-let coolx = new CoolxPostListener(mr, chronicleListenerPort, webport1)
+let coolx = new CoolxPostListener(mr, webport1)
 coolx.start()
 
-let ezar = new EzarPostListener(mr, chronicleListenerPort, webport2)
+let ezar = new EzarPostListener(mr, webport2)
 ezar.start()
 
-
-let blacq = new BlacqMarketPostListener(mr, chronicleListenerPort, webport3)
+let blacq = new BlacqMarketPostListener(mr, webport3)
 blacq.start()
 
 process.once('SIGINT', function (code) {

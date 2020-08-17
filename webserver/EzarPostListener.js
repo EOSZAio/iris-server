@@ -9,7 +9,7 @@ const jwtEnabled = false //for verifcation only
 
 class EzarPostListener {
 
-  constructor(messageRouter, chronicleport = 8800,  webport = 8081) {
+  constructor(messageRouter, webport = 8081) {
       this.app = express();
       console.log(`Start webserver, ${webport}`)
       this.server = this.app.listen(webport)

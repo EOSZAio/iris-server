@@ -9,7 +9,7 @@ const jwtEnabled = false //for verifcation only
 
 class CoolxPostListener {
 
-  constructor(messageRouter, chronicleport = 8800,  webport = 8080) {
+  constructor(messageRouter, webport = 8080) {
       this.app = express();
       console.log(`Start webserver, ${webport}`)
       this.server = this.app.listen(webport)
