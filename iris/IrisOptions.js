@@ -22,6 +22,18 @@ const opts = [
         type: Number,
         description: "The port that will be exposed to the ezar web for incoming posts (default 8081).",
         defaultValue: 8081
+    },
+    {
+        name: 'web-port3', alias: 'b',
+        type: Number,
+        description: "The port that will be exposed to the ezar web for incoming posts (default 8081).",
+        defaultValue: 8082
+    },
+    {
+        name: 'websocket-port', alias: 'w',
+        type: Number,
+        description: "The port that will be exposed to websockets for incoming connections (default 8881).",
+        defaultValue: 8881
     }
 ]
 

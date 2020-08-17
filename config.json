@@ -1,4 +1,5 @@
 {
   "ezar_url": "https://dev.api.ezar.co.za/",
-  "coolx_url": "https://walletapi.coolx.io/"
+  "coolx_url": "https://walletapi.coolx.io/",
+  "blacq_url": "https://api.blacqmarket.co.za/"
 }

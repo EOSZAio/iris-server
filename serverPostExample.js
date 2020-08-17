@@ -1,9 +1,12 @@
-const { CoolxPostListener, EzarPostListener } = require('./index')
+const { CoolxPostListener, EzarPostListener, BlacqMarketPostListener, MessageRouter } = require('./index')
 const JWTService = require('./jwt/JWTService')
 const axios = require('axios')
+let mr = new MessageRouter()
+mr.start()
 
-let coolx = new CoolxPostListener()
-let ezar = new EzarPostListener()
+let coolx = new CoolxPostListener(mr)
+let ezar = new EzarPostListener(mr)
+let blacq = new BlacqMarketPostListener(mr)
 
 let jwt = new JWTService()
 var coolxAccounts = [
@@ -84,4 +87,4 @@ var coolxAccounts = [
 
 coolx.start()
 ezar.start()
-
+blacq.start()

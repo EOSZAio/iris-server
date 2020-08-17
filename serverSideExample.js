@@ -3,8 +3,8 @@ const { CoolxPostListener } = require('./index')
 const util = require('util')
 
 
-let coolx = new CoolxPostListener()
 let mr = new MessageRouter()
+let coolx = new CoolxPostListener(mr)
 
 
 /*let testSubscription = MessageSubscription.actionSubscription('stablecoin.z', 'transfer', function (message) {

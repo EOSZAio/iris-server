@@ -4,7 +4,8 @@
 // configure ports without creating a javascript file
 
 const MessageRouter = require('../routing/MessageRouter')
-const { CoolxPostListener, EzarPostListener } = require('../index')
+const { CoolxPostListener, EzarPostListener, BlacqMarketPostListener } = require('../index')
+const ClientListener = require('../websockets/ClientListener')
 const optionsDef = require('./IrisOptions')
 const commandLineArgs = require('command-line-args')
 const commandLineUsage = require('command-line-usage')
@@ -19,10 +20,16 @@ if (options.help) {
 const chronicleListenerPort = options['chronicle-port']
 const webport1 = isNaN(options['web-port1']) ? 8080 : options['web-port1']
 const webport2 = isNaN(options['web-port2']) ? 8081 : options['web-port2']
-const clientListenerPort = isNaN(options['web-port1']) ? 8880 : options['web-port1']
+const webport2 = isNaN(options['web-port3']) ? 8082 : options['web-port3']
+
+const clientListenerPort = isNaN(options['websocket-port']) ? 8881 : options['websocket-port']
+
 
 let mr = new MessageRouter(chronicleListenerPort)
 mr.start()
+
+let ws = new new ClientListener(mr, clientListenerPort)
+ws.start()
 
 let coolx = new CoolxPostListener(mr, chronicleListenerPort, webport1)
 coolx.start()
@@ -30,10 +37,16 @@ coolx.start()
 let ezar = new EzarPostListener(mr, chronicleListenerPort, webport2)
 ezar.start()
 
+
+let blacq = new BlacqMarketPostListener(mr, chronicleListenerPort, webport3)
+blacq.start()
+
 process.once('SIGINT', function (code) {
     console.log('\nSIGINT received...');
+    ws.stop()
     coolx.stop();
     ezar.stop();
+    blacq.stop();
     process.exit(1);
 });
 
