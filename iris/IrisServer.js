@@ -28,7 +28,7 @@ const clientListenerPort = isNaN(options['websocket-port']) ? 8881 : options['we
 let mr = new MessageRouter(chronicleListenerPort)
 mr.start()
 
-let ws = new new ClientListener(mr, clientListenerPort)
+let ws = new ClientListener(mr, clientListenerPort)
 ws.start()
 
 let coolx = new CoolxPostListener(mr, chronicleListenerPort, webport1)
