@@ -148,7 +148,7 @@ class CoolxPostListener {
         console.log(`${this.ezar_url}api/v1/Transaction/Notify: ${res.status} and ${res.statusText}`)
       })
       .catch((error) => {
-        console.error(error)
+        console.error(error.response)
       })
     }
     else{ //Send to COOLX API
@@ -158,7 +158,7 @@ class CoolxPostListener {
         console.log(`https://walletapi.coolx.io/api/v2/Message?: ${res.status} and ${res.statusText}`)
       })
       .catch((error) => {
-        console.error(error)
+        console.error(error.response)
       })
     }
   }
@@ -173,7 +173,7 @@ class CoolxPostListener {
       console.log(`https://us-central1-coolx-242811.cloudfunctions.net/processTrade: ${res.status} and ${res.statusText}`)
     })
     .catch((error) => {
-      console.error(error)
+      console.error(error.response)
     })
   }
 
@@ -188,7 +188,7 @@ class CoolxPostListener {
       console.log(`${this.ezar_url}api/v1/wallet/PostMessage: ${res.status} and ${res.statusText}`)
     })
     .catch((error) => {
-      console.error(error)
+      console.error(error.response)
     })
   }
 

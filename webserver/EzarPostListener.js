@@ -86,7 +86,7 @@ class EzarPostListener {
         console.log(`${this.ezar_url}api/v1/Transaction/Notify: ${res.status} and ${res.statusText}`)
       })
       .catch((error) => {
-        console.error(error.data)
+        console.error(error.response)
       })
   }
 
@@ -98,7 +98,7 @@ class EzarPostListener {
       console.log(`${this.ezar_url}api/v1/wallet/PostPaymentMessage: ${res.status} and ${res.statusText}`)
     })
     .catch((error) => {
-      console.error(error.data)
+      console.error(error.response)
     })
 
     axios.post(`${this.ezar_url}api/v1/Transaction/Notify`, payload)
@@ -106,7 +106,7 @@ class EzarPostListener {
       console.log(`${this.ezar_url}api/v1/Transaction/Notify: ${res.status} and ${res.statusText}`)
     })
     .catch((error) => {
-      console.error(error)
+      console.error(error.response)
     })
   }
 

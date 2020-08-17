@@ -81,7 +81,7 @@ class BlacqMarketPostListener {
       console.log(`${this.blacq_url}v1/ezar/notify: ${res.status} and ${res.statusText}`)
     })
     .catch((error) => {
-      console.error(error)
+      console.error(error.response)
     })
   }
 
