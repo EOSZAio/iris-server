@@ -10,12 +10,12 @@ services:
     #  - "3001:3001"
     #  - "3002:3002"
     network_mode: "host"
-  chronicle:
-    build: 
-      context: "./Chronicle\ docker/"
-    image: "chronicle-server:v1"
-    container_name: chronicle
-    volumes:
-      - ~/chronicle-data:/chronicle-data
-    restart: unless-stopped
-    network_mode: "host"
+  #chronicle:
+  #  build: 
+  #    context: "./Chronicle\ docker/"
+  #  image: "chronicle-server:v1"
+  #  container_name: chronicle
+  #  volumes:
+  #    - ~/chronicle-data:/chronicle-data
+  #  restart: unless-stopped
+  #  network_mode: "host"
