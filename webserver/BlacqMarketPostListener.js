@@ -26,7 +26,7 @@ class BlacqMarketPostListener {
   start() {
     //Hardcoded for now
     this.subscribeAction("escrow.blacq", "logorder")
-    this.subscribeAction("escrow.blacq.z","logsuborder")
+    this.subscribeAction("escrow.blacq","logsuborder")
 
   }
 
@@ -81,7 +81,7 @@ class BlacqMarketPostListener {
       console.log(`${this.blacq_url}v1/ezar/notify: ${res.status} and ${res.statusText}`)
     })
     .catch((error) => {
-      console.error(error.data)
+      console.error(error)
     })
   }
 
