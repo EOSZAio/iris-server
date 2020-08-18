@@ -93,7 +93,7 @@ class EzarPostListener {
   actionHandler(message) {
     console.log(`ACTION - message - ${JSON.stringify(message)}`)
     let payload = this.jwt.sign(message)
-    axios.post(`${this.ezar_url}api/v1/wallet/PostPaymentMessage?`, payload)
+    axios.post(`${this.ezar_url}api/v1/wallet/PostPaymentMessage`, payload)
     .then((res) => {
       console.log(`${this.ezar_url}api/v1/wallet/PostPaymentMessage: ${res.status} and ${res.statusText}`)
     })
