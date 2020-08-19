@@ -76,7 +76,11 @@ class BlacqMarketPostListener {
   actionHandler(message) {
     console.log(`ACTION - message - ${JSON.stringify(message)}`)
     let payload = this.jwt.sign(message)
-    axios.post(`${this.blacq_url}v1/ezar/notify`, payload)
+    let config = {
+      headers: { 'Content-Type': 'text/plain' }
+    };
+    
+    axios.post(`${this.blacq_url}v1/ezar/notify`, payload, config)
     .then((res) => {
       console.log(`${this.blacq_url}v1/ezar/notify: ${res.status} and ${res.statusText}`)
     })
